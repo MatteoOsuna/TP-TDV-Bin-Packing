@@ -1,7 +1,10 @@
 #include "busqueda_local.h"
 
 #include <algorithm>
+#include <limits>
+#include <numeric>
 #include <utility>
+#include <vector>
 
 // ---------------------------------------------------------------------------
 // Auxiliares de RELOCATE
@@ -139,6 +142,65 @@ bool operador_swap(Solucion& sol, double alpha, double beta,
     return false;
 }
 
+bool operador_vaciar_camion(Solucion& sol, double alpha, double beta,
+                            double delta_temp, ModoTemp modo) {
+    if (sol.K() <= 1) return false;
+
+    const Instancia& inst = *sol.inst;
+    const double obj_actual = sol.objetivo(alpha, beta);
+    const double eps = 1e-12;
+
+    std::vector<int> orden_bins(sol.K());
+    std::iota(orden_bins.begin(), orden_bins.end(), 0);
+    std::sort(orden_bins.begin(), orden_bins.end(), [&](int a, int b) {
+        if (sol.bins[a].size() != sol.bins[b].size()) {
+            return sol.bins[a].size() < sol.bins[b].size();
+        }
+        return a < b;
+    });
+
+    for (int a : orden_bins) {
+        std::vector<int> items_a = sol.bins[a];
+        std::sort(items_a.begin(), items_a.end(), [&](int x, int y) {
+            if (inst.peso[x] != inst.peso[y]) return inst.peso[x] > inst.peso[y];
+            return x < y;
+        });
+
+        Solucion candidata = sol;
+        candidata.bins.erase(candidata.bins.begin() + a);
+
+        bool todos_ubicados = true;
+        for (int item : items_a) {
+            int mejor_b = -1;
+            double mejor_ganancia = -std::numeric_limits<double>::infinity();
+
+            for (int b = 0; b < candidata.K(); ++b) {
+                if (!entra_en(inst, candidata.bins[b], item, delta_temp, modo)) {
+                    continue;
+                }
+                double gan = similitud_con(inst, candidata.bins[b], item);
+                if (gan > mejor_ganancia) {
+                    mejor_ganancia = gan;
+                    mejor_b = b;
+                }
+            }
+
+            if (mejor_b < 0) {
+                todos_ubicados = false;
+                break;
+            }
+            candidata.bins[mejor_b].push_back(item);
+        }
+
+        if (todos_ubicados && candidata.objetivo(alpha, beta) < obj_actual - eps) {
+            sol = std::move(candidata);
+            return true;
+        }
+    }
+
+    return false;
+}
+
 Solucion busqueda_local(Solucion inicial, double alpha, double beta,
                         double delta_temp, ModoTemp modo) {
     Solucion actual = std::move(inicial);
@@ -147,6 +209,7 @@ Solucion busqueda_local(Solucion inicial, double alpha, double beta,
         mejoro = false;
         if (operador_relocate(actual, alpha, beta, delta_temp, modo)) mejoro = true;
         if (operador_swap(actual, alpha, beta, delta_temp, modo)) mejoro = true;
+        if (operador_vaciar_camion(actual, alpha, beta, delta_temp, modo)) mejoro = true;
     }
     return actual;
 }
