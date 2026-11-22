@@ -34,6 +34,11 @@ bool operador_relocate(Solucion& sol, double alpha, double beta,
 bool operador_swap(Solucion& sol, double alpha, double beta,
                    double delta_temp = std::numeric_limits<double>::infinity(),
                    ModoTemp modo = ModoTemp::DELTA);
+// Operador 3: VACIAR CAMION. Intenta reubicar todos los productos de un camion
+// en el resto de los camiones existentes para reducir K en 1 y mejorar el objetivo.
+bool operador_vaciar_camion(Solucion& sol, double alpha, double beta,
+                            double delta_temp = std::numeric_limits<double>::infinity(),
+                            ModoTemp modo = ModoTemp::DELTA);
 
 // Aplica los operadores mientras alguno mejore (hasta llegar a un optimo local).
 Solucion busqueda_local(Solucion inicial, double alpha, double beta,
