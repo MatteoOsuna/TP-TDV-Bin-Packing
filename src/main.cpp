@@ -19,12 +19,13 @@ namespace fs = std::filesystem;
 
 // Uso:
 //   tp2                                    -> modo interactivo con menus
-//   tp2 <input> <output> [metodo] [alpha] [beta] [delta] [modo]
+//   tp2 <input> <output> [metodo] [alpha] [beta] [delta] [modo] [iteraciones] [semilla]
 //      metodo: bfd | mochila | costo | meta | ffd  (default bfd)
 //      alpha:  default 1
 //      beta:   numero o "auto" = 1/S_max (default auto)
 //      delta:  tolerancia de temperatura en grados (default sin limite)
 //      modo:   delta | bandas | hibrido (default delta)
+//      iteraciones, semilla: solo para "meta" (default 1000 y 42)
 
 const double INF = std::numeric_limits<double>::infinity();
 
@@ -34,7 +35,8 @@ const double ALPHA_FIJO = 1.0;
 const double DELTA_FIJO = 6.0;  // tolerancia de temperatura, en grados
 
 static Solucion resolver(const Instancia& inst, const std::string& metodo,
-                         double alpha, double beta, double delta, ModoTemp modo) {
+                         double alpha, double beta, double delta, ModoTemp modo,
+                         int iteraciones = 1000, unsigned semilla = 42) {
     if (metodo == "bfd") return constructiva_best_fit(inst, alpha, beta, delta, modo);
     if (metodo == "mochila") return constructiva_mochila(inst, alpha, beta, delta, modo);
     if (metodo == "costo") return constructiva_costo(inst, alpha, beta, delta, modo);
@@ -45,6 +47,8 @@ static Solucion resolver(const Instancia& inst, const std::string& metodo,
         params.beta = beta;
         params.delta_temp = delta;
         params.modo = modo;
+        params.iteraciones = iteraciones;
+        params.semilla = semilla;
         return metaheuristica(inst, params);
     }
     throw std::runtime_error("Metodo desconocido: " + metodo + " (use bfd | mochila | costo | meta | ffd)");
@@ -275,11 +279,13 @@ static int modo_cli(int argc, char** argv) {
     const double alpha = (argc > 4) ? std::atof(argv[4]) : 1.0;
     const double delta = (argc > 6) ? std::atof(argv[6]) : INF;
     const ModoTemp modo = (argc > 7) ? parse_modo_temp(argv[7]) : ModoTemp::DELTA;
+    const int iteraciones = (argc > 8) ? std::atoi(argv[8]) : 1000;
+    const unsigned semilla = (argc > 9) ? static_cast<unsigned>(std::atoi(argv[9])) : 42u;
 
     Instancia inst = Instancia::leer(path_in);
     bool beta_es_auto = false;
     const double beta = beta_desde_texto((argc > 5) ? argv[5] : "auto", inst, beta_es_auto);
-    Solucion sol = resolver(inst, metodo, alpha, beta, delta, modo);
+    Solucion sol = resolver(inst, metodo, alpha, beta, delta, modo, iteraciones, semilla);
 
     if (!sol.es_factible(delta, modo))
         std::cerr << "ADVERTENCIA: la solucion generada no es factible.\n";
@@ -299,7 +305,8 @@ int main(int argc, char** argv) {
             std::cerr << "Uso:\n"
                       << "  " << argv[0] << "                (modo interactivo con menus)\n"
                       << "  " << argv[0] << " <input> <output> [metodo=bfd|mochila|costo|meta|ffd]"
-                      << " [alpha] [beta] [delta] [modo=delta|bandas|hibrido]\n";
+                      << " [alpha] [beta] [delta] [modo=delta|bandas|hibrido]"
+                      << " [iteraciones] [semilla]\n";
             return 1;
         }
         return modo_cli(argc, argv);
