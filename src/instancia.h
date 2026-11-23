@@ -25,7 +25,7 @@ struct Instancia {
         return total;
     }
 
-    // beta = 1 / S_max: con alpha = 1, toda la similitud vale menos que un camion.
+    // beta = 1 / S_max normaliza la similitud a una contribucion maxima de 1.
     double beta_auto() const {
         double s = S_max();
         return s > 0.0 ? 1.0 / s : 0.0;

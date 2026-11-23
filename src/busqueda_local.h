@@ -8,7 +8,7 @@
 #include "temperatura.h"
 
 // ===========================================================================
-// TODO (grupo): BUSQUEDA LOCAL. El enunciado pide AL MENOS 2 operadores.
+// Búsqueda local.
 //
 // Cada operador recibe una solucion factible, busca UN movimiento que mejore
 // la funcion objetivo sin romper ninguna restriccion, lo aplica y devuelve
