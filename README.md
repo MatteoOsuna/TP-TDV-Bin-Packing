@@ -125,9 +125,60 @@ python experimentacion/ver_construccion.py --inst instancias/lote_dificil/inst_n
 
 ## 5. Experimentos
 
+### Batería completa desde la terminal
+
+Para comparar heurísticas, modelos térmicos, META y soluciones exactas pequeñas:
+
+```powershell
+py -3 experimentacion/ejecutar_suite.py
+```
+
+El script compila `tp2.exe` si falta o está desactualizado y genera (si faltan)
+instancias sintéticas con `n = 100, 250, 500, 1000`, cinco semillas y capacidades
+`C = 20, 100`. Después corre:
+
+- FFD, BFD, MOCHILA y COSTO bajo `delta`, `bandas` e `hibrido`;
+- un barrido de `delta = 2, 4, 6, 8, 12` sobre instancias representativas:
+  `delta=2` usa el perfil por categorías y los demás, temperaturas de frontera;
+- META con una configuración fija de 100 iteraciones y tres semillas, en
+  cuatro casos pequeños. No barre hiperparámetros;
+- una comparación contra un óptimo exacto por programación dinámica para tres
+  instancias pequeñas (`n=10`, `C=20`).
+
+Guarda todas las corridas en un único CSV dentro de una carpeta nueva de
+`resultados/`. Las métricas incluyen `K`, cota y gap, similitud absoluta y
+normalizada, objetivo, utilización, factibilidad y tiempo. En la fase exacta
+también aparecen `K_optimo` y `delta_objetivo_optimo`. El resumen de terminal
+informa media y desvío de `K` y `S_norm`, mediana de tiempo y resultados por
+tamaño/capacidad. La ejecución predeterminada realiza 723 corridas; la
+comparación META se puede omitir con `--sin-meta-tuning`. Usa `alpha=1` y
+`beta=auto` (`1/S_max`); no vuelve a barrer esos parámetros.
+
+El barrido térmico y la comparación META pueden omitirse para una corrida más
+corta:
+
+```powershell
+py -3 experimentacion/ejecutar_suite.py --sin-barrido-temperatura --sin-meta-tuning
+```
+
+También se pueden reducir tamaños y semillas. Por ejemplo, prueba breve:
+
+```powershell
+py -3 experimentacion/ejecutar_suite.py --sizes 20 --seeds 1 --capacities 100 --sin-meta-tuning --sin-barrido-temperatura
+```
+
+El barrido alpha/beta y su justificación forman parte del informe final:
+`report/informe_actualizado.docx`. El CSV crudo y el gráfico del barrido se
+conservan en `report/` como respaldo experimental.
+
+Las instancias generadas son sintéticas y permiten comparaciones controladas; no
+deben presentarse como datos reales de Todiafour. El perfil de frontera se guarda
+separado en `instancias/suite_fronteras/`, sin reemplazar las instancias existentes.
+Las herramientas de experimentos individuales se describen debajo.
+
 | Script | Qué hace | Comando |
 |---|---|---|
-| `generador/generador.py` | crea una instancia | `python generador/generador.py --n 50 --C 100 --seed 1 --out instancias/inst_50.txt` |
+| `generador/generador.py` | crea una instancia; `--perfil-temperatura fronteras` genera temperaturas cercanas a cambios entre modelos | `python generador/generador.py --n 50 --C 100 --seed 1 --out instancias/inst_50.txt` |
 | `experimentacion/comparar_lote.py` | corre las heurísticas sobre una carpeta de instancias y compara K, gap contra la cota inferior, similitud y tiempo (CSV + gráfico) | `python experimentacion/comparar_lote.py --instdir instancias/lote` |
 | `experimentacion/comparar_constructivas.py` | BFD, MOCHILA y COSTO lado a lado sobre una instancia, con K, similitud y objetivo de cada una (marca la de mejor objetivo). Con `--metodos` se eligen otras | `python experimentacion/comparar_constructivas.py --inst instancias/lote_dificil/inst_n40_s3.txt --delta 6` |
 | `experimentacion/comparar_temperatura.py` | camiones que cuesta cada modelo de temperatura, variando Δ | `python experimentacion/comparar_temperatura.py --instdir instancias/lote` |
@@ -163,9 +214,9 @@ for n in 10 20 30 40 50 60 80 100; do for s in 1 2 3; do python generador/genera
 
 ## 6. Modelo elegido
 
-**alpha y beta: "camiones primero".** `alpha = 1` y `beta = 1 / S_max`, donde `S_max` es la suma de todas las similitudes de la instancia. Así, toda la similitud junta vale menos que un camión: gana la solución con menos camiones y, si empatan, la de más similitud. Para comparar se usa la alternativa "similitud primero" (`alpha = 1`, `beta = 1`).
+**Alpha y beta.** Se usa `alpha = 1` y `beta = 1 / S_max`, donde `S_max` es la suma de todas las similitudes de la instancia. El objetivo queda `K - S/S_max`: la similitud normalizada aporta como máximo una unidad, por lo que no puede compensar una diferencia de dos o más camiones; en el caso extremo puede empatar una diferencia de un camión. La justificación completa, el barrido realizado y los resultados están en `report/informe_actualizado.docx`; los datos crudos y el gráfico están en `report/`.
 
-**Temperatura: restricción dura, con Δ = 6 grados.** Un camión no puede mezclar temperaturas incompatibles. En las instancias generadas, los productos de una misma categoría difieren como mucho 4 grados (±2 alrededor de su temperatura típica) y dos categorías de distinta temperatura están a 12 grados o más. Cualquier Δ entre 4 y 12 deja cada categoría junta sin mezclarla con otra; elegimos Δ = 6 por estar dentro de ese rango con margen. Usamos el mismo Δ en los modos delta e híbrido para que la comparación entre ellos sea justa. Hay tres formas de aplicar la restricción:
+**Temperatura: restricción dura, con Δ = 6 grados.** Un camión no puede mezclar temperaturas incompatibles. En el perfil normal, los productos de una misma categoría difieren como mucho 4 grados (±2 alrededor de su temperatura típica) y dos categorías de distinta temperatura están a 12 grados o más. Cualquier Δ entre 4 y 12 deja cada categoría junta sin mezclarla con otra; elegimos Δ = 6 por estar dentro de ese rango con margen. El perfil `fronteras` existe para el barrido experimental: usa temperaturas cerca de los umbrales, de modo que delta, bandas e híbrido puedan producir resultados distintos. Usamos el mismo Δ en los modos delta e híbrido para que la comparación entre ellos sea justa. Hay tres formas de aplicar la restricción:
 
 | Modo | Regla para cada camión |
 |---|---|
@@ -208,8 +259,8 @@ src/
   solucion.*         solución, función objetivo, factibilidad y escritura
   temperatura.*      los tres modos de temperatura
   constructivas.*    BFD, MOCHILA y COSTO (y FFD como base)
-  busqueda_local.*   operadores de búsqueda local          (a completar)
-  metaheuristica.*   metaheurística                         (a completar)
+  busqueda_local.*   relocate, swap y vaciar camión
+  metaheuristica.*   GRASP con búsqueda local
   main.cpp           modo interactivo y modo línea de comandos
 experimentacion/     scripts de gráficos y experimentos
 generador/           generador de instancias
@@ -222,12 +273,10 @@ presentacion/        presentación para la defensa oral (index.html, o presentac
 
 - [x] Modelo: alpha, beta y temperatura.
 - [x] Constructivas BFD, MOCHILA y COSTO.
-- [ ] Búsqueda local: relocate y swap (`src/busqueda_local.cpp`). Los TODO del archivo explican los pasos.
-- [ ] Metaheurística (`src/metaheuristica.cpp`). El TODO propone un esquema GRASP.
-- [ ] Experimentación: comparar heurísticas, "camiones primero" vs "similitud primero" y tuning de parámetros.
-- [ ] Informe (máximo 10 páginas).
-
-Cuando esté la metaheurística, sumar `meta` a la lista `METODOS` de `comparar_lote.py` para los experimentos.
+- [x] Búsqueda local: relocate, swap y vaciar camión.
+- [x] Metaheurística: GRASP con búsqueda local.
+- [x] Experimentación con suite controlada y barrido alpha/beta.
+- [ ] Completar los datos finales de integrantes, grupo y fecha en el informe.
 
 > **Uso de IA:** las heurísticas constructivas (BFD, MOCHILA, COSTO y FFD) y la infraestructura de este proyecto (lectura y escritura, menú, gráficos y scripts de experimentos) se hicieron con asistencia de IA. Hay que compartir la conversación en la entrega.
 

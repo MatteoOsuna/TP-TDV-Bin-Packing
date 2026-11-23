@@ -13,7 +13,6 @@ Instancia Instancia::leer(const std::string& path) {
     if (!(in >> inst.n >> inst.capacidad)) {
         throw std::runtime_error("Error leyendo 'n' y 'C' en: " + path);
     }
-
     inst.peso.resize(inst.n);
     inst.temperatura.resize(inst.n);
     for (int i = 0; i < inst.n; ++i) {
