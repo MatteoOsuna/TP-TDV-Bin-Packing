@@ -462,11 +462,6 @@
     </div>
   </section>
 
-  <div class="pie"><span>TP2 · Armado de cargas</span><span id="contador"></span></div>
-</div>
-
-<div id="notas"><div class="titulo">Notas para el que presenta (N para ocultar)</div><div id="textoNota"></div></div>
-<div id="ayuda">← → avanzar · N notas · F pantalla completa</div>
   <!-- ===================== 1. operadores ===================== -->
 <section class="slide mi">
   <div class="seccion">Búsqueda local</div>
@@ -554,7 +549,11 @@
   <div class="nota">Honestidad sobre el resultado: la ganancia del GRASP sobre relocate+swap es chica porque la búsqueda local ya hace casi todo el trabajo y el número de camiones ya está cerca del mínimo. Medido solo sobre lote difícil con delta = 6 y beta = 1/Smax; faltaría repetir en el lote fácil y con otros valores de alfa y beta.</div>
 </section>
 
+  <div class="pie"><span>TP2 · Armado de cargas</span><span id="contador"></span></div>
+</div>
 
+<div id="notas"><div class="titulo">Notas para el que presenta (N para ocultar)</div><div id="textoNota"></div></div>
+<div id="ayuda">← → avanzar · N notas · F pantalla completa</div>
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
   const escenario = document.getElementById('escenario');
