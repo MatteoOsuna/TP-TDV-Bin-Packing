@@ -96,9 +96,9 @@
     <div class="peso" style="background:#e9f6ef;color:var(--verde)">toda la similitud<small>vale entre 0 y 1</small></div>
   </div>
   <div class="tiles" style="margin-top:10px">
-    <div class="tile rojo" data-paso="3"><span class="tag">β = 0 · solo camiones</span><span class="num">−10%</span><span class="lbl">similitud, sin ahorrar camiones</span></div>
-    <div class="tile verde" data-paso="3"><span class="tag">β = 1/S<sub>máx</sub> · nuestro</span><span class="num">0</span><span class="lbl">camiones extra</span></div>
-    <div class="tile" data-paso="3"><span class="tag">similitud ×200</span><span class="num">=</span><span class="lbl">misma solución</span></div>
+    <div class="tile rojo" data-paso="3"><span class="tag">Solo $K$</span><span class="num">−</span><span class="lbl">no usa la información de similitud</span></div>
+    <div class="tile verde" data-paso="3"><span class="tag">β = 1/S<sub>máx</sub> · nuestro</span><span class="num">1</span><span class="lbl">unidad máxima de similitud normalizada</span></div>
+    <div class="tile" data-paso="3"><span class="tag">Cambio de escala</span><span class="num">=</span><span class="lbl">mismos resultados en el barrido</span></div>
     <div class="tile azul" data-paso="4"><span class="tag">barrido α × β</span><span class="num">9 / 9</span><span class="lbl">combinaciones iguales</span></div>
   </div>
   <div class="cierre" data-paso="5" style="margin-top:18px">Óptimo exacto, n = 12 · <b>0 camiones extra</b> con nuestro criterio</div>
@@ -174,7 +174,7 @@
   <h2>FFD gana en flota; COSTO, en calidad de carga</h2>
   <div class="tiles big" style="flex:1">
     <div class="tile azul" data-paso="1"><span class="tag">FFD · 480 corridas</span><span class="num">69.83</span><span class="lbl">camiones · la más rápida</span></div>
-    <div class="tile verde" data-paso="2"><span class="tag">COSTO vs FFD · lote difícil</span><span class="num">+4%</span><span class="lbl">similitud con casi los mismos camiones (14.04 vs 14.00)</span></div>
+    <div class="tile verde" data-paso="2"><span class="tag">COSTO · similitud normalizada</span><span class="num">0.1221</span><span class="lbl">vs 0.1206 de FFD/BFD; casi los mismos camiones</span></div>
   </div>
   <div class="tiles big" style="flex:1;margin-top:18px">
     <div class="tile verde" data-paso="3"><span class="tag">vs óptimo exacto (n = 10)</span><span class="num">4×</span><span class="lbl">COSTO más cerca que el resto</span></div>
