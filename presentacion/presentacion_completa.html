@@ -96,6 +96,91 @@
   #notas .titulo { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: #9fb0d8; margin-bottom: 6px; }
   .nota { display: none; }
   #ayuda { position: fixed; right: 14px; bottom: 10px; font-size: 13px; color: #6b7590; z-index: 5; }
+   .slide.mi{padding:44px 64px 40px}
+  .mi .seccion{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--azul);margin-bottom:6px}
+  .mi h2{font-size:33px;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
+  .mi p, .mi li, .mi td, .mi th{font-size:17px;line-height:1.4}
+  .mi .suave{color:var(--suave)}
+  .mi ul{margin-left:22px}
+  .mi li{margin-bottom:4px}
+  .mi .fila{display:flex;gap:22px;flex:1;min-height:0}
+  .mi .col{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+  .mi .caja{background:var(--fondo-caja);border:1px solid var(--linea);border-radius:12px;padding:12px 16px;transition:opacity .25s,box-shadow .25s}
+  .mi .caja h3{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+  .mi .caja.elegimos{border-left:6px solid var(--azul)}
+  .mi .caja.elegimos h3{color:var(--azul)}
+  .mi .caja.porque{border-left:6px solid var(--naranja)}
+  .mi .caja.porque h3{color:var(--naranja)}
+  .mi .caja.evidencia{border-left:6px solid var(--verde)}
+  .mi .caja.evidencia h3{color:var(--verde)}
+  .mi .formula{font-family:"Cambria Math",Georgia,serif;font-size:26px;color:var(--azul-osc);background:#eef2fd;border-radius:10px;padding:6px 16px;display:inline-block;margin:4px 0}
+  .mi table{border-collapse:collapse;width:100%}
+  .mi th{background:var(--azul);color:#fff;text-align:left;font-size:14px;padding:6px 9px;font-weight:600}
+  .mi td{padding:4px 9px;border-bottom:1px solid var(--linea);font-size:15.5px}
+  .mi td.n, .mi th.n{text-align:right;font-variant-numeric:tabular-nums}
+  .mi tr.nuestra td{background:#eaf0ff;font-weight:700}
+  .mi tr.mala td{color:var(--rojo)}
+  .mi .respuesta{margin-top:12px;background:var(--tinta);color:#fff;border-radius:12px;padding:10px 18px;font-size:17px;display:flex;gap:14px;align-items:center}
+  .mi .respuesta b.et{color:#9fd3ff;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
+  .mi .ok{color:var(--verde);font-weight:700}
+  .mi .no{color:var(--rojo);font-weight:700}
+  .mi .chip{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:20px;background:#eef2fd;color:var(--azul-osc);margin-left:6px;vertical-align:2px}
+  .mi .heur{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mi .heur .caja p{font-size:15.5px}
+  .mi .heur .caja h3{font-size:16px;letter-spacing:.5px;text-transform:none;color:var(--tinta)}
+  .mi .figura{width:100%;border:1px solid var(--linea);border-radius:10px}
+  .mi /* modo foco (lo usa el video guia): resalta el bloque que se esta explicando */
+  body.foco-on [data-paso]{opacity:.28}
+  .mi h2{font-size:40px;margin-bottom:22px}
+  .mi .tiles{display:flex;gap:18px}
+  .mi .tile{flex:1;border-radius:16px;padding:18px 20px;background:var(--fondo-caja);border:1px solid var(--linea);display:flex;flex-direction:column;gap:4px;transition:opacity .25s,box-shadow .25s}
+  .mi .tile .num{font-size:46px;font-weight:800;letter-spacing:-1px;line-height:1.05;color:var(--azul-osc)}
+  .mi .tile .lbl{font-size:18px;color:var(--suave);line-height:1.3}
+  .mi .tile.verde{background:#e9f6ef;border-color:#bfe5d1}
+  .mi .tile.verde .num{color:var(--verde)}
+  .mi .tile.rojo{background:#fcecea;border-color:#f3c6c0}
+  .mi .tile.rojo .num{color:var(--rojo)}
+  .mi .tile.azul{background:#eaf0ff;border-color:#c9d6fb}
+  .mi .tile .tag{font-size:15px;font-weight:700;letter-spacing:.3px;color:var(--tenue)}
+  .mi .tiles.big .tile{justify-content:center;padding:22px 30px}
+  .mi .tiles.big .num{font-size:68px}
+  .mi .tiles.big .lbl{font-size:21px}
+  .mi .grande-formula{font-family:"Cambria Math",Georgia,serif;font-size:64px;color:var(--azul-osc);text-align:center;padding:6px 0 0}
+  .mi .sub{font-size:20px;color:var(--suave);text-align:center}
+  .mi .balanza{display:flex;align-items:center;justify-content:center;gap:26px;margin:4px 0}
+  .mi .peso{border-radius:14px;padding:14px 26px;font-size:24px;font-weight:700;text-align:center}
+  .mi .peso small{display:block;font-size:15px;font-weight:500;color:var(--suave)}
+  .mi .cierre{margin-top:auto;text-align:center;font-size:22px;color:var(--tinta);padding:12px;border-radius:12px;background:var(--tinta);color:#fff;transition:opacity .25s,box-shadow .25s}
+  .mi .cierre b{color:#9fd3ff}
+  .mi .heur2{display:flex;gap:18px}
+  .mi .hcard{flex:1;border-radius:16px;padding:10px 20px;border:2px solid var(--linea);transition:opacity .25s,box-shadow .25s}
+  .mi .hcard .nombre{font-size:34px;font-weight:800}
+  .mi .hcard .idea{font-size:21px;color:var(--suave)}
+  .mi .hcard.ffd{border-color:#c9d6fb}
+  .mi .hcard.ffd .nombre{color:var(--azul)}
+  .mi .hcard.costo{border-color:#bfe5d1}
+  .mi .hcard.costo .nombre{color:var(--verde)}
+  .mi .variantes{font-size:17px;color:var(--tenue);text-align:center;padding:4px;border-radius:10px;transition:opacity .25s,box-shadow .25s}
+  .mi .op{flex:1;border-radius:16px;padding:14px 20px;border:2px solid var(--linea);transition:opacity .25s,box-shadow .25s}
+  .mi .op .nombre{font-size:30px;font-weight:800}
+  .mi .op .idea{font-size:19px;color:var(--suave);margin:2px 0 8px}
+  .mi .op .f{font-family:"Cambria Math",Georgia,serif;font-size:19px;color:var(--azul-osc);background:#eef2fd;border-radius:8px;padding:4px 10px;display:inline-block}
+  .mi .op.r{border-color:#c9d6fb}
+  .mi .op.r .nombre{color:var(--azul)}
+  .mi .op.s{border-color:#bfe5d1}
+  .mi .op.s .nombre{color:var(--verde)}
+  .mi .op.v{border-color:#f0d9bd}
+  .mi .op.v .nombre{color:var(--naranja)}
+  .mi .pasos{display:flex;gap:14px;align-items:stretch}
+  .mi .paso{flex:1;border-radius:14px;padding:12px 16px;background:var(--fondo-caja);border:1px solid var(--linea);transition:opacity .25s,box-shadow .25s}
+  .mi .paso .n{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--azul);color:#fff;font-weight:800;align-items:center;justify-content:center;font-size:16px;margin-bottom:6px}
+  .mi .paso>b{font-size:20px;display:block;margin-bottom:4px}
+  .mi .paso span b{font-size:inherit;display:inline}
+  .mi .paso span{font-size:17px}
+  .mi .cj p, .mi .cj li{font-size:21px;line-height:1.45}
+  .mi .paso span{color:var(--suave)}
+  .mi .flecha{align-self:center;font-size:30px;color:var(--tenue)}
+  .mi td.gana{color:var(--verde);font-weight:700}
 </style>
 </head>
 <body>
@@ -382,6 +467,93 @@
 
 <div id="notas"><div class="titulo">Notas para el que presenta (N para ocultar)</div><div id="textoNota"></div></div>
 <div id="ayuda">← → avanzar · N notas · F pantalla completa</div>
+  <!-- ===================== 1. operadores ===================== -->
+<section class="slide mi">
+  <div class="seccion">Búsqueda local</div>
+  <h2>Tres movimientos que mejoran una solución ya armada</h2>
+  <div class="heur2" style="gap:16px">
+    <div class="op r"><div class="nombre">RELOCATE</div><div class="idea">mover un producto a otro camión</div><div class="f">Δ = −α·[vacía] − β·(ganancia − pérdida)</div></div>
+    <div class="op s"><div class="nombre">SWAP</div><div class="idea">intercambiar dos productos de camiones distintos</div><div class="f">Δ = −β·(Δsim<sub>a</sub> + Δsim<sub>b</sub>)</div></div>
+    <div class="op v"><div class="nombre">VACIAR CAMIÓN</div><div class="idea">reubicar todo un camión en los demás</div><div class="f">Δ = obj(candidata) − obj(actual)</div></div>
+  </div>
+  <div class="fila" style="margin-top:22px;gap:18px;flex:none">
+    <div class="caja cj elegimos" style="flex:1;padding:18px 22px"><h3>Cómo se aplican</h3><p>Se repiten los tres hasta que ninguno mejora: un <b>óptimo local</b>. Cada movimiento baja el objetivo, así que siempre termina.</p></div>
+    <div class="caja cj porque" style="flex:1;padding:18px 22px"><h3>Por qué siempre factible</h3><p>Antes de mover se chequea <b>capacidad y temperatura</b> solo del camión que recibe. Sacar un producto nunca rompe nada.</p></div>
+  </div>
+  <div class="cierre">Evaluación <b>incremental</b>: se calcula solo lo que cambia, no el objetivo completo</div>
+  <div class="nota">Relocate y swap no cambian el conflicto entre camiones y similitud; vaciar camión es el único que puede bajar K. Los tres usan la misma función objetivo J = K − S/Smáx.</div>
+</section>
+
+<!-- ===================== 2. evidencia operadores ===================== -->
+<section class="slide mi">
+  <div class="seccion">Búsqueda local · Evidencia</div>
+  <h2>Relocate + swap: +20% de similitud, mismos camiones</h2>
+  <div class="fila" style="gap:26px">
+    <div class="col" style="flex:1.5">
+      <table>
+        <tr><th>Partiendo de FFD (24 instancias, Δ = 6)</th><th class="n">Camiones</th><th class="n">S / Smáx</th></tr>
+        <tr><td>FFD sola</td><td class="n">14.00</td><td class="n">0.2107</td></tr>
+        <tr><td>+ relocate</td><td class="n">14.00</td><td class="n">0.2310</td></tr>
+        <tr><td>+ swap</td><td class="n">14.00</td><td class="n">0.2336</td></tr>
+        <tr class="nuestra"><td>+ relocate + swap</td><td class="n">14.00</td><td class="n gana">0.2529</td></tr>
+        <tr><td>+ los tres operadores</td><td class="n">14.00</td><td class="n">0.2529</td></tr>
+      </table>
+      <p class="suave" style="font-size:15px">Lote difícil (C = 20). Medido sobre nuestro código; todas las soluciones verificadas factibles.</p>
+    </div>
+    <div class="col" style="flex:1;justify-content:center">
+      <div class="tile verde"><span class="tag">relocate + swap</span><span class="num">+20%</span><span class="lbl">similitud juntada</span></div>
+      <div class="tile azul"><span class="tag">tiempo extra</span><span class="num">&lt; 1 ms</span><span class="lbl">por instancia</span></div>
+    </div>
+  </div>
+  <div class="cierre" style="margin-top:14px">Se complementan: <b>0.2310</b> y <b>0.2336</b> por separado, <b>0.2529</b> juntos &nbsp;·&nbsp; vaciar camión <b>no aportó</b> acá</div>
+  <div class="nota">Ser honestos con vaciar camión: en este lote FFD ya queda a ~1.8% de la cota inferior de camiones, así que no hay camión que se pueda eliminar y el operador no mejora nada. Lo dejamos porque es el único capaz de bajar K y es el que haría falta si cambia el balance entre camiones y similitud (otro alfa/beta).</div>
+</section>
+
+<!-- ===================== 3. GRASP ===================== -->
+<section class="slide mi">
+  <div class="seccion">Metaheurística</div>
+  <h2>GRASP: construir con azar, mejorar, quedarse con la mejor</h2>
+  <div class="pasos">
+    <div class="paso"><div class="n">1</div><b>Construir al azar</b><span>FFD (peso decreciente), pero cada producto va a uno de los <b>RCL</b> camiones con más similitud, sorteado</span></div>
+    <div class="flecha">→</div>
+    <div class="paso"><div class="n">2</div><b>Mejorar</b><span>búsqueda local: relocate + swap + vaciar camión hasta el óptimo local</span></div>
+    <div class="flecha">→</div>
+    <div class="paso"><div class="n">3</div><b>Guardar</b><span>si el objetivo mejora a la mejor solución, se queda con ella. Se repite <b>iteraciones</b> veces</span></div>
+  </div>
+  <div class="fila" style="margin-top:22px;gap:18px;flex:none">
+    <div class="caja cj elegimos" style="flex:1;padding:18px 22px"><h3>Parámetros a tunear</h3><ul><li><b>RCL</b>: cuántos camiones candidatos se sortean (1 = golosa pura)</li><li><b>iteraciones</b>: cuántas soluciones se arman</li><li><b>semilla</b>: misma semilla, mismo resultado</li></ul></div>
+    <div class="caja cj porque" style="flex:1;padding:18px 22px"><h3>Por qué GRASP</h3><p>Ya tenemos construcción golosa y búsqueda local: GRASP las <b>reutiliza tal cual</b> y solo agrega azar. Parte de FFD + búsqueda local, así que <b>nunca es peor</b> que eso.</p></div>
+  </div>
+  <div class="cierre">La solución final se <b>verifica factible</b> antes de aceptarla</div>
+  <div class="nota">El azar está en el paso 1: con RCL = 1 la construcción es determinista y las iteraciones repiten lo mismo. Al partir de la solución de FFD mejorada, la metaheurística es una cota segura.</div>
+</section>
+
+<!-- ===================== 4. tuning ===================== -->
+<section class="slide mi">
+  <div class="seccion">Metaheurística · Tuning</div>
+  <h2>RCL = 3 e iteraciones = 100: más cómputo casi no suma</h2>
+  <div class="fila" style="gap:26px">
+    <div class="col" style="flex:1.4">
+      <table>
+        <tr><th>GRASP (24 instancias × 5 semillas)</th><th class="n">S / Smáx</th><th class="n">Tiempo</th></tr>
+        <tr><td>FFD + relocate + swap (sin GRASP)</td><td class="n">0.2529</td><td class="n">&lt; 1 ms</td></tr>
+        <tr><td>RCL 3 · 10 iteraciones</td><td class="n">0.2552</td><td class="n">9 ms</td></tr>
+        <tr class="nuestra"><td>RCL 3 · 100 iteraciones</td><td class="n gana">0.2559</td><td class="n">93 ms</td></tr>
+        <tr><td>RCL 3 · 1000 iteraciones</td><td class="n">0.2560</td><td class="n">924 ms</td></tr>
+        <tr><td>RCL 1 · 100 (sin azar)</td><td class="n">0.2538</td><td class="n">87 ms</td></tr>
+        <tr><td>RCL 5 · 100</td><td class="n">0.2558</td><td class="n">103 ms</td></tr>
+        <tr><td>RCL 10 · 100</td><td class="n">0.2558</td><td class="n">94 ms</td></tr>
+      </table>
+    </div>
+    <div class="col" style="flex:1;justify-content:center">
+      <div class="tile verde"><span class="tag">GRASP vs solo búsqueda local</span><span class="num">+1.2%</span><span class="lbl">de similitud, mismos 14.00 camiones</span></div>
+      <div class="tile azul"><span class="tag">100 → 1000 iteraciones</span><span class="num">+0.0001</span><span class="lbl">por 10× el tiempo</span></div>
+    </div>
+  </div>
+  <div class="cierre" style="margin-top:14px">El azar ayuda (RCL 1 → 3: <b>+0.0021</b>), pero la mejora <b>se achata</b> rápido &nbsp;·&nbsp; ~0.1 s por instancia</div>
+  <div class="nota">Honestidad sobre el resultado: la ganancia del GRASP sobre relocate+swap es chica porque la búsqueda local ya hace casi todo el trabajo y el número de camiones ya está cerca del mínimo. Medido solo sobre lote difícil con delta = 6 y beta = 1/Smax; faltaría repetir en el lote fácil y con otros valores de alfa y beta.</div>
+</section>
+
 
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
